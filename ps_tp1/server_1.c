@@ -16,8 +16,14 @@
 
 int main()
 {
-    // TODO
-        
+    printf("Hello there!\n");
+    srand(999);
+    while (1) {
+        printf("pid : %d | ppid : %d | grp : %d\n", getpid(), getppid(), getpgrp());
+        printf("%d\n", rand());
+        sleep(1);
+    }
+    printf("Loop exited\n");
     return EXIT_SUCCESS;
 }
 
