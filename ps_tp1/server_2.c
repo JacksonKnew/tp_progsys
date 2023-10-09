@@ -26,6 +26,10 @@ void stop_handler(int sig) {
     running = false;
 }
 
+void exit_message() {
+    printf("Process killed\n");
+}
+
 int main()
 {
     printf("Hello there!\n");
@@ -37,6 +41,8 @@ int main()
 
     sigaction(SIGINT, &sig, NULL);   
     sigaction(SIGTERM, &sig, NULL); 
+
+    atexit(exit_message);
 
     while (running) {
         printf("pid : %d | ppid : %d | grp : %d\n", getpid(), getppid(), getpgrp());
