@@ -27,7 +27,7 @@ pid_t cpid;
 void stop_handler(int sig) {
     printf("%s || %d\n", is_parent, sig);
     running = false;
-    if (cpid) kill(cpid, SIGTERM);
+    if (cpid) kill(cpid, sig);
 }
 
 void exit_message() {
