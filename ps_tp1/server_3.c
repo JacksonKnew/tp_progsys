@@ -38,6 +38,10 @@ int main()
 {
 
     cpid = fork();
+    if (cpid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
 
     strncpy(is_parent, cpid ? "child " : "parent", 256);
 

@@ -29,3 +29,10 @@ le processus fils est zombifié lorsqu'il est kill jusqu'a ce que le processus p
 Lorsqu'on tue le père le fils est adopté par le grand père.
 
 ### 2.2
+
+On remarque bien que par défaut Ctrl + C et kill sur l'un des 2 autres kill le deuxième. On doit juste ajouter un sigaction au père pour le cas où l'enfant est kill afin qu'il affiche toujours son lessage de fin.
+
+## 3
+
+### 3.1
+
