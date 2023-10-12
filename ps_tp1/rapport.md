@@ -36,3 +36,9 @@ On remarque bien que par défaut Ctrl + C et kill sur l'un des 2 autres kill le 
 
 ### 3.1
 
+On a le comportement attendu. Le serveur commence la communication en envoyant son pid et envoie un message de fin de communication sur le fifo quand il est kill.
+
+## 4
+
+### 4.1
+
