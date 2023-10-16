@@ -18,6 +18,8 @@
 
 #include "MessageBox.hpp"
 
+using microseconds = std::chrono::duration< int, std::micro >;
+
 /*
  * Consommateur de messages
  */
@@ -27,9 +29,21 @@ public:
     using ProdOrCons::ProdOrCons;
  
     void operator()() override {
+        std::cout << "entered cons operator" << std::endl;
         // TODO :retirer de box_ nb_messages_ entiers avec attente aléatoire avant
         // chaque retrait. Afficher des messages pour suivre l'avancement.
         // Afficher un message d'erreur si un nombre négatif est extrait.
+        int message;
+
+        for (int i = 0; i < nb_messages_; i++) {
+            message = box_.get();
+            if (message < 0) {
+                perror("got negative number");
+                exit(EXIT_FAILURE);
+            }
+            std::cout << "Got message " << message << std::endl;
+            std::this_thread::sleep_for( microseconds{ random_engine_() });
+        }
     }
 };
 

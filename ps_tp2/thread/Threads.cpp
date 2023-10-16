@@ -27,7 +27,19 @@ void one_producer_one_consumer() {
     // - Créer un producteur et un consommateur
     // - Créer les threads correspondants
     // - Attendre la fin des threads
- 
+    
+    Random random_engine{50}; 
+    MessageBox box{};
+    Producer producer{0, box, random_engine, 20};
+    Consumer consumer{1, box, random_engine, 20};
+
+    std::thread prod_thread(producer);
+    std::thread cons_thread(consumer);
+
+    prod_thread.join();
+    std::cout << "joined prod thread" << std::endl;
+    cons_thread.join();
+    std::cout << "joined cons thread" << std::endl;
 }
 
 /*

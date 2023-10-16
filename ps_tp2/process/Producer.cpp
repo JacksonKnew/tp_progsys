@@ -18,6 +18,8 @@
 
 #include "MessageBox.hpp"
 
+using microseconds = std::chrono::duration< int, std::micro >;
+
 /*
  * Producteur de messages
  */
@@ -27,8 +29,15 @@ public:
     using ProdOrCons::ProdOrCons;
  
     void operator()() override {
+        std::cout << "entered prod operator" << std::endl;
         // TODO : déposer dans box nb_messages nombres entiers positifs avec attente
         // aléatoire entre chaque. Afficher des messages pour suivre l'avancement.
+        for (int i = 0; i > nb_messages_; i++) {
+            int r = random_engine_();
+            box_.put(r);
+            std::cout << "adding " << r << " integer to box" << std::endl;
+            std::this_thread::sleep_for( microseconds{ random_engine_() });
+        }
     }
 };
 
