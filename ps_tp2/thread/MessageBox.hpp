@@ -22,18 +22,29 @@ public:
         // TODO :
         // - Ajouter les instructions de synchronisation
         // - Ne pas faire d'affichage dans cette méthode
+        std::unique_lock<std::mutex> lock_put(matmut);
+        while (data_available == 1) {status_empty.wait(lock_put);}
         basic_put( message );
+        data_available = 1;
+        status_full.notify_one();
     }
  
     int get() {
         // TODO :
         // - Ajouter les instructions de synchronisation
         // - Ne pas faire d'affichage dans cette méthode
+        std::unique_lock<std::mutex> lock_get(matmut);
+        while (data_available == 0) {status_full.wait(lock_get);}
         int message{ basic_get() };
+        data_available = 0;
+        status_empty.notify_one();
         return message;
     }
 private:
     // TODO : 
     // - Ajouter les objets de synchronisation
+    std::mutex matmut;
+    std::condition_variable status_full, status_empty;
+    int data_available;
 };
  

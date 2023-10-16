@@ -30,8 +30,8 @@ void one_producer_one_consumer() {
     
     Random random_engine{50}; 
     MessageBox box{};
-    Producer producer{0, box, random_engine, 20};
-    Consumer consumer{1, box, random_engine, 20};
+    Producer producer{1, box, random_engine, 20};
+    Consumer consumer{2, box, random_engine, 20};
 
     std::thread prod_thread(producer);
     std::thread cons_thread(consumer);

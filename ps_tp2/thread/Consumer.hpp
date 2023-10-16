@@ -38,7 +38,7 @@ public:
                 perror("got negative number");
                 exit(EXIT_FAILURE);
             }
-            std::cout << "Got message " << message << std::endl;
+            osyncstream{std::cout} << "Got message " << message << "\n";
             std::this_thread::sleep_for( microseconds{ random_engine_() });
         }
     }
