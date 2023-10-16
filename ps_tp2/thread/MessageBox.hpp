@@ -23,9 +23,9 @@ public:
         // - Ajouter les instructions de synchronisation
         // - Ne pas faire d'affichage dans cette méthode
         std::unique_lock<std::mutex> lock_put(matmut);
-        while (data_available == 1) {status_empty.wait(lock_put);}
+        while (data_available == box_size_) {status_empty.wait(lock_put);}
         basic_put( message );
-        data_available = 1;
+        data_available += 1;
         status_full.notify_one();
     }
  
@@ -36,7 +36,7 @@ public:
         std::unique_lock<std::mutex> lock_get(matmut);
         while (data_available == 0) {status_full.wait(lock_get);}
         int message{ basic_get() };
-        data_available = 0;
+        data_available -= 1;
         status_empty.notify_one();
         return message;
     }

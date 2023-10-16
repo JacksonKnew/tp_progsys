@@ -67,6 +67,7 @@ void several_producers_and_consumers() {
     for (unsigned int i=0; i<p.size(); ++i) p.at(i).join();
     osyncstream{std::cout} << "all producers stopped\n";
     for (unsigned int i=0; i<c.size(); ++i) c.at(i).join();
+    osyncstream{std::cout} << "all consumers stopped\n";
 }
 
 int main() {
